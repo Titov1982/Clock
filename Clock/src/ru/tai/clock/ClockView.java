@@ -55,7 +55,11 @@ public class ClockView {
         jframeClock.setContentPane(jpanelFrame);
         jframeClock.add(jb_mode, blFrame.SOUTH);
 
-        jframeClock.setSize(200, 200);
+        Dimension sSize = Toolkit.getDefaultToolkit().getScreenSize ();
+        int w = 200;
+        int h = 200;
+
+        jframeClock.setBounds((sSize.width / 2) - w / 2, (sSize.height / 2) - h / 2, w, h);
         jframeClock.setVisible(true);
         jframeClock.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

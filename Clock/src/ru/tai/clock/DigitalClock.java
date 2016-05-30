@@ -20,8 +20,8 @@ public class DigitalClock implements Clock {
     private TimeImp timer;
 
     public DigitalClock(TimeImp timer){
-        this.timer = timer;
-        timer.registerObserver(this);
+        this.timer = timer;             // Получаем ссылку на объект поставщика времени
+        timer.registerObserver(this);   // Регистрируем подписку
 
         jpanelDigitalClock.setLayout(bl);                       // Устанавливаем для панели лейаут
         jpanelDigitalClock.add(jlableDigitalClock, bl.CENTER);  // Добавляем к панели объект, который будет показывать время
@@ -33,7 +33,7 @@ public class DigitalClock implements Clock {
         return jpanelDigitalClock;
     }
 
-
+    // Метод подписчика, который вызывает поставщик времени для передачи времени
     @Override
     public void update(Date date) {
         DateFormat dtfrm = DateFormat.getTimeInstance();
