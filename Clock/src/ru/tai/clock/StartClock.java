@@ -13,37 +13,43 @@ public class StartClock {
         BorderLayout blFrame = new BorderLayout();
         JPanel jpanelFrame = new JPanel();
 
-        final Clock[] clock = {new DigitalClock()};
+        TimeImp timer = new TimeImp();  // Создаем объект - Поставщик времени
+
+        final Clock[] clock = {new DigitalClock_2(timer)};
+
+        jpanelFrame.add(clock[0].getWindowContent(), blFrame.CENTER);
+        jpanelFrame.revalidate();
+        jpanelFrame.repaint();
 
         JButton jb_mode = new JButton("Mode");
-        jb_mode.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e)
-            {
-                if (clock[0] instanceof DigitalClock ){
-                    System.out.println("DigitalClock");
-
-                    clock[0].stopTimer();
-                    jpanelFrame.remove(clock[0].getWindowContent());
-                    clock[0] = new DigitalClock_2();
-                    jpanelFrame.add(clock[0].getWindowContent(), blFrame.CENTER);
-                    jpanelFrame.revalidate();
-                    jpanelFrame.repaint();
-                }
-                else if (clock[0] instanceof DigitalClock_2 ){
-                    System.out.println("DigitalClock_2");
-
-                    clock[0].stopTimer();
-                    jpanelFrame.remove(clock[0].getWindowContent());
-                    clock[0] = new DigitalClock();
-                    jpanelFrame.add(clock[0].getWindowContent(), blFrame.CENTER);
-                    jpanelFrame.revalidate();
-                    jpanelFrame.repaint();
-                }
-                else {
-                    System.out.println(clock[0].getClass().toString());
-                }
-            }
-        });
+//        jb_mode.addActionListener(new ActionListener(){
+//            public void actionPerformed(ActionEvent e)
+//            {
+//                if (clock[0] instanceof DigitalClock ){
+//                    System.out.println("DigitalClock");
+//
+//                    clock[0].stopTimer();
+//                    jpanelFrame.remove(clock[0].getWindowContent());
+//                    clock[0] = new DigitalClock_2();
+//                    jpanelFrame.add(clock[0].getWindowContent(), blFrame.CENTER);
+//                    jpanelFrame.revalidate();
+//                    jpanelFrame.repaint();
+//                }
+//                else if (clock[0] instanceof DigitalClock_2 ){
+//                    System.out.println("DigitalClock_2");
+//
+//                    clock[0].stopTimer();
+//                    jpanelFrame.remove(clock[0].getWindowContent());
+//                    clock[0] = new DigitalClock();
+//                    jpanelFrame.add(clock[0].getWindowContent(), blFrame.CENTER);
+//                    jpanelFrame.revalidate();
+//                    jpanelFrame.repaint();
+//                }
+//                else {
+//                    System.out.println(clock[0].getClass().toString());
+//                }
+//            }
+//        });
 
 
         jpanelFrame.setLayout(blFrame);
