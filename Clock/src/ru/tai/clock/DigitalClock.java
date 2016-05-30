@@ -17,18 +17,14 @@ public class DigitalClock implements Clock {
     private JLabel jlableDigitalClock = new JLabel();   // Создаем сам объект, который будет показывать время
 
     private Date time;                      // Создаем объект - Дата и время
-    private TimeImp timer = new TimeImp();  // Создаем объект - Поставщик времени
+    private TimeImp timer;
 
-    public DigitalClock(){
+    public DigitalClock(TimeImp timer){
+        this.timer = timer;
+        timer.registerObserver(this);
+
         jpanelDigitalClock.setLayout(bl);                       // Устанавливаем для панели лейаут
         jpanelDigitalClock.add(jlableDigitalClock, bl.CENTER);  // Добавляем к панели объект, который будет показывать время
-
-        time = timer.getTime(); // Получаем время из Поставщика времени
-//        DateFormat dtfrm = DateFormat.getTimeInstance();
-//        String dateTime = dtfrm.format(time);
-//        jlableDigitalClock.setText(dateTime);
-
-        jlableDigitalClock.setText(time.toString());    // Отображаем время в объект, который будет показывать время
     }
 
     // Возвратить ссылку на нашу панель с конкретными часами для панели JPanel окна JFrame
@@ -37,10 +33,12 @@ public class DigitalClock implements Clock {
         return jpanelDigitalClock;
     }
 
-    // Функция остановки таймера и завершения дочернего потока (по сути - функция декаратор)
+
     @Override
-    public void stopTimer(){
-        timer.stopTimer();
+    public void update(Date date) {
+        DateFormat dtfrm = DateFormat.getTimeInstance();
+        String dateTime = dtfrm.format(date);
+        jlableDigitalClock.setText(dateTime);
     }
 
 

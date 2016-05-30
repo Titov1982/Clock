@@ -8,9 +8,7 @@ import java.util.Date;
  */
 public interface Time {
 
-    // Функция получения времени
-    Date getTime();
-
-    // Функция остановки таймера и завершения дочернего потока
-    void stopTimer();
+    void registerObserver(Clock clock);
+    void removeObserver(Clock clock);
+    void notifyObservers();
 }

@@ -1,6 +1,7 @@
 package ru.tai.clock;
 
 import javax.swing.JPanel;
+import java.util.Date;
 
 /**
  * Created by titov on 23.05.16.
@@ -12,5 +13,7 @@ public interface Clock {
     JPanel getWindowContent();
 
     // Функция остановки таймера и завершения дочернего потока (по сути - функция декаратор)
-    void stopTimer();
+    //void stopTimer();
+
+    void update (Date date);
 }

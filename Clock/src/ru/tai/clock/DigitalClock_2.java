@@ -17,17 +17,14 @@ public class DigitalClock_2 implements Clock {
     private JTextField jtf = new JTextField();
 
     private Date time;
-    private TimeImp timer = new TimeImp();
+    private TimeImp timer;
 
-    public DigitalClock_2(){
+    public DigitalClock_2(TimeImp timer){
+        this.timer = timer;
+        timer.registerObserver(this);
+
         jpanelDigitalClock.setLayout(bl);
         jpanelDigitalClock.add(jtf, bl.CENTER);
-
-        time = timer.getTime();
-//        DateFormat dtfrm = DateFormat.getTimeInstance();
-//        String dateTime = dtfrm.format(time);
-//        jtf.setText(dateTime);
-        jtf.setText(time.toString());
     }
 
     // Возвратить ссылку на нашу панель с конкретными часами для панели JPanel окна JFrame
@@ -36,9 +33,11 @@ public class DigitalClock_2 implements Clock {
         return jpanelDigitalClock;
     }
 
-    // Функция остановки таймера и завершения дочернего потока (по сути - функция декаратор)
     @Override
-    public void stopTimer(){
-        timer.stopTimer();
+    public void update(Date date) {
+        DateFormat dtfrm = DateFormat.getTimeInstance();
+        String dateTime = dtfrm.format(date);
+        jtf.setText(dateTime);
     }
+
 }
