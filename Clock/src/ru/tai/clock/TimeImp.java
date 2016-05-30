@@ -20,19 +20,12 @@ public class TimeImp implements Time {
         timer.schedule(new TimerTask() {        // В конструкторе создаем ананимный класс и его объект и перегрузаем метод Run()
             @Override
             public void run() {
-                System.out.println("Прошло 1 секунды");
+                System.out.println("Прошло 1 секунды" + " " + Thread.currentThread() + " " + "Observers: " + observers.size());
                 time = new Date();  // Получаем новую дату и время путем создания нового объекта
 
                 notifyObservers();
             }
         }, 1000, 1000); // вызываем таймер каждую секунду
-    }
-
-
-    // Функция завершения работы таймера посредствам завершения дочернего потока
-    // Функция необходима при переключении вида часов? Так как для каждого вида часов создается свой таймер
-    private void stopTimer() {
-        timer.cancel();
     }
 
     @Override
@@ -42,8 +35,6 @@ public class TimeImp implements Time {
 
     @Override
     public void removeObserver(Clock clock) {
-        //clock.stopTimer();
-        timer.cancel();
         observers.remove(clock);
     }
 
